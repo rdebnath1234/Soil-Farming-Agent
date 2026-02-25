@@ -1,0 +1,242 @@
+{
+    "created": 1627939168,
+    "updated": 1772006469,
+    "created_date": "2021-08-02T21:19:28Z",
+    "updated_date": "2026-02-25T08:01:09Z",
+    "active": "1",
+    "index_name": "9ef84268-d588-465a-a308-a864a43d0070",
+    "org": [
+        "Ministry of Agriculture and Farmers Welfare",
+        "Department of Agriculture and Farmers Welfare"
+    ],
+    "org_type": "Central",
+    "source": "data.gov.in",
+    "title": "Current Daily Price of Various Commodities from Various Markets (Mandi)",
+    "external_ws_url": "",
+    "visualizable": "1",
+    "field": [
+        {
+            "name": "State",
+            "id": "state",
+            "type": "keyword"
+        },
+        {
+            "name": "District",
+            "id": "district",
+            "type": "keyword"
+        },
+        {
+            "name": "Market",
+            "id": "market",
+            "type": "keyword"
+        },
+        {
+            "name": "Commodity",
+            "id": "commodity",
+            "type": "keyword"
+        },
+        {
+            "name": "Variety",
+            "id": "variety",
+            "type": "keyword"
+        },
+        {
+            "name": "Grade",
+            "id": "grade",
+            "type": "keyword"
+        },
+        {
+            "name": "Arrival_Date",
+            "id": "arrival_date",
+            "type": "date"
+        },
+        {
+            "name": "Min_x0020_Price",
+            "id": "min_price",
+            "type": "double"
+        },
+        {
+            "name": "Max_x0020_Price",
+            "id": "max_price",
+            "type": "double"
+        },
+        {
+            "name": "Modal_x0020_Price",
+            "id": "modal_price",
+            "type": "double"
+        }
+    ],
+    "external_ws": 0,
+    "catalog_uuid": "6141ea17-a69d-4713-b600-0a43c8fd9a6c",
+    "sector": [
+        "Agriculture",
+        "Agricultural Marketing"
+    ],
+    "target_bucket": {
+        "field": "9ef84268-d588-465a-a308-a864a43d0070",
+        "index": "daily_mandi_price",
+        "type": "6141ea17-a69d-4713-b600-0a43c8fd9a6c"
+    },
+    "desc": "Current Daily Price of Various Commodities from Various Markets (Mandi)",
+    "field_exposed": [
+        {
+            "name": "State",
+            "id": "state.keyword",
+            "type": "keyword"
+        },
+        {
+            "name": "District",
+            "id": "district",
+            "type": "keyword"
+        },
+        {
+            "name": "Market",
+            "id": "market",
+            "type": "keyword"
+        },
+        {
+            "name": "Commodity",
+            "id": "commodity",
+            "type": "keyword"
+        },
+        {
+            "name": "Variety",
+            "id": "variety",
+            "type": "keyword"
+        },
+        {
+            "name": "Grade",
+            "id": "grade",
+            "type": "keyword"
+        }
+    ],
+    "message": "Resource lists",
+    "version": "2.2.0",
+    "status": "ok",
+    "total": 14,
+    "count": 10,
+    "limit": "10",
+    "offset": "0",
+    "records": [
+        {
+            "state": "West Bengal",
+            "district": "Darjeeling",
+            "market": "Siliguri APMC",
+            "commodity": "Potato",
+            "variety": "Other",
+            "grade": "FAQ",
+            "arrival_date": "25\/02\/2026",
+            "min_price": 900,
+            "max_price": 950,
+            "modal_price": 930
+        },
+        {
+            "state": "West Bengal",
+            "district": "Sounth 24 Parganas",
+            "market": "Diamond Harbour(South 24-pgs) APMC",
+            "commodity": "Potato",
+            "variety": "Jyoti",
+            "grade": "FAQ",
+            "arrival_date": "25\/02\/2026",
+            "min_price": 800,
+            "max_price": 840,
+            "modal_price": 820
+        },
+        {
+            "state": "West Bengal",
+            "district": "Darjeeling",
+            "market": "Karsiyang(Matigara) APMC",
+            "commodity": "Potato",
+            "variety": "Red",
+            "grade": "FAQ",
+            "arrival_date": "25\/02\/2026",
+            "min_price": 2000,
+            "max_price": 2200,
+            "modal_price": 2100
+        },
+        {
+            "state": "West Bengal",
+            "district": "Jhargram",
+            "market": "Jhargram APMC",
+            "commodity": "Potato",
+            "variety": "Jyoti",
+            "grade": "Grade A",
+            "arrival_date": "25\/02\/2026",
+            "min_price": 630,
+            "max_price": 680,
+            "modal_price": 660
+        },
+        {
+            "state": "West Bengal",
+            "district": "Paschim Bardhaman",
+            "market": "Durgapur APMC",
+            "commodity": "Potato",
+            "variety": "Jyoti",
+            "grade": "FAQ",
+            "arrival_date": "25\/02\/2026",
+            "min_price": 700,
+            "max_price": 800,
+            "modal_price": 780
+        },
+        {
+            "state": "West Bengal",
+            "district": "Medinipur(E)",
+            "market": "Tamluk (Medinipur E) APMC",
+            "commodity": "Potato",
+            "variety": "Jyoti",
+            "grade": "FAQ",
+            "arrival_date": "25\/02\/2026",
+            "min_price": 850,
+            "max_price": 950,
+            "modal_price": 900
+        },
+        {
+            "state": "West Bengal",
+            "district": "Paschim Bardhaman",
+            "market": "Asansol APMC",
+            "commodity": "Potato",
+            "variety": "Jyoti",
+            "grade": "FAQ",
+            "arrival_date": "25\/02\/2026",
+            "min_price": 700,
+            "max_price": 800,
+            "modal_price": 780
+        },
+        {
+            "state": "West Bengal",
+            "district": "Darjeeling",
+            "market": "Darjeeling APMC",
+            "commodity": "Potato",
+            "variety": "Red",
+            "grade": "FAQ",
+            "arrival_date": "25\/02\/2026",
+            "min_price": 2000,
+            "max_price": 2200,
+            "modal_price": 2100
+        },
+        {
+            "state": "West Bengal",
+            "district": "Nadia",
+            "market": "Kalyani APMC",
+            "commodity": "Potato",
+            "variety": "Other",
+            "grade": "Local",
+            "arrival_date": "25\/02\/2026",
+            "min_price": 740,
+            "max_price": 760,
+            "modal_price": 750
+        },
+        {
+            "state": "West Bengal",
+            "district": "Hooghly",
+            "market": "Sheoraphuly APMC",
+            "commodity": "Potato",
+            "variety": "Other",
+            "grade": "FAQ",
+            "arrival_date": "25\/02\/2026",
+            "min_price": 720,
+            "max_price": 740,
+            "modal_price": 730
+        }
+    ]
+}
