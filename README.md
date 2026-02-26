@@ -200,3 +200,39 @@ curl \"http://localhost:3000/advice?pincode=700001\" \\
 ## Build Validation
 - Backend: `npm run build`
 - Frontend: `npm run build`
+
+## Feature Screenshots
+### Public Pages
+1. Landing
+![Landing](docs/screenshots/01-landing.png)
+
+2. Register
+![Register](docs/screenshots/02-register.png)
+
+3. Login
+![Login](docs/screenshots/03-login.png)
+
+### Dashboard & Core Modules
+4. Dashboard Overview
+![Dashboard Overview](docs/screenshots/04-dashboard-overview.png)
+
+5. Pincode-based Soil + Mandi Advisory
+![Pincode Advisory](docs/screenshots/05-pincode-advisory.png)
+
+6. Live Mandi Price Table
+![Live Mandi](docs/screenshots/06-mandi-live-table.png)
+
+7. Soil Search + Pagination
+![Soil Search Pagination](docs/screenshots/07-soil-search-pagination.png)
+
+8. Distributor Search + Pagination
+![Distributor Search Pagination](docs/screenshots/08-distributor-search-pagination.png)
+
+9. Bengali AI Assistant Popup
+![AI Popup](docs/screenshots/09-ai-popup-chat.png)
+
+10. Activity Logs
+![Activity Logs](docs/screenshots/10-activity-logs.png)
+
+11. Full Dashboard
+![Full Dashboard](docs/screenshots/11-dashboard-full.png)
