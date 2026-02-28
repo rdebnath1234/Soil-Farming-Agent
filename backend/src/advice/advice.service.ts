@@ -25,14 +25,23 @@ export class AdviceService {
 
   async getAdvice(pincode: string, actor: { email: string; role: string }) {
     const location = await this.resolveLocation(pincode);
-    const soil = await this.soilService.getSoilProperties(location.lat, location.lon);
+    const soil = await this.soilService.getSoilProperties(
+      location.lat,
+      location.lon,
+    );
 
     const recommendationsBase = generateCropRecommendations(soil);
     const cropNames = recommendationsBase.map((item) => item.crop);
 
     let mandiByCrop: Record<
       string,
-      { market: string; min: number; modal: number; max: number; date: string }[]
+      {
+        market: string;
+        min: number;
+        modal: number;
+        max: number;
+        date: string;
+      }[]
     >;
     try {
       mandiByCrop = await this.mandiService.getMandiByCrop({
@@ -44,11 +53,13 @@ export class AdviceService {
       throw new InternalServerErrorException('Failed to fetch mandi prices');
     }
 
-    const recommendations: CropRecommendation[] = recommendationsBase.map((item) => ({
-      crop: item.crop,
-      why_bn: item.why_bn,
-      mandi_prices: mandiByCrop[item.crop] || [],
-    }));
+    const recommendations: CropRecommendation[] = recommendationsBase.map(
+      (item) => ({
+        crop: item.crop,
+        why_bn: item.why_bn,
+        mandi_prices: mandiByCrop[item.crop] || [],
+      }),
+    );
 
     const totalMandiRows = recommendations.reduce(
       (acc, item) => acc + item.mandi_prices.length,

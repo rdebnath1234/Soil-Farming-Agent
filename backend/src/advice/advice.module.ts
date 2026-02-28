@@ -10,6 +10,11 @@ import { AdviceSoilService } from './soil.service';
 @Module({
   imports: [AgmarknetModule, ActivityLogsModule],
   controllers: [AdviceController],
-  providers: [AdviceService, PincodeService, AdviceSoilService, AdviceMandiService],
+  providers: [
+    AdviceService,
+    PincodeService,
+    AdviceSoilService,
+    AdviceMandiService,
+  ],
 })
 export class AdviceModule {}

@@ -38,7 +38,9 @@ export class PincodeService {
 
   async resolvePincode(pincode: string) {
     const cacheKey = `pincode:${pincode}`;
-    const cached = await this.getCache<{ state: string; district: string }>(cacheKey);
+    const cached = await this.getCache<{ state: string; district: string }>(
+      cacheKey,
+    );
     if (cached) {
       return cached;
     }
@@ -47,7 +49,9 @@ export class PincodeService {
     try {
       response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
     } catch {
-      throw new InternalServerErrorException('Unable to reach India Post service');
+      throw new InternalServerErrorException(
+        'Unable to reach India Post service',
+      );
     }
 
     if (!response.ok) {
@@ -58,7 +62,7 @@ export class PincodeService {
 
     const payload = (await response.json()) as IndiaPostResponse[];
     const first = payload?.[0];
-    const postOffices = (first?.PostOffice || []).filter(Boolean) as IndiaPostOffice[];
+    const postOffices = (first?.PostOffice || []).filter(Boolean);
 
     if (first?.Status !== 'Success' || postOffices.length === 0) {
       throw new NotFoundException('Pincode location details not found');
@@ -126,7 +130,10 @@ export class PincodeService {
       return null;
     }
 
-    const rows = (await response.json()) as Array<{ lat?: string; lon?: string }>;
+    const rows = (await response.json()) as Array<{
+      lat?: string;
+      lon?: string;
+    }>;
     const first = rows.find((item) => item.lat && item.lon);
     if (!first?.lat || !first?.lon) {
       return null;
@@ -142,7 +149,10 @@ export class PincodeService {
   }
 
   private pickBestPostOffice(postOffices: IndiaPostOffice[]) {
-    const grouped = new Map<string, { count: number; items: IndiaPostOffice[] }>();
+    const grouped = new Map<
+      string,
+      { count: number; items: IndiaPostOffice[] }
+    >();
 
     for (const office of postOffices) {
       const state = office.State || '';
@@ -154,7 +164,9 @@ export class PincodeService {
       grouped.set(key, bucket);
     }
 
-    const bestGroup = Array.from(grouped.values()).sort((a, b) => b.count - a.count)[0];
+    const bestGroup = Array.from(grouped.values()).sort(
+      (a, b) => b.count - a.count,
+    )[0];
     const candidates = (bestGroup?.items || postOffices).slice();
 
     candidates.sort((a, b) => {
@@ -175,7 +187,10 @@ export class PincodeService {
   }
 
   private async getCache<T>(key: string): Promise<T | null> {
-    const snapshot = await this.firestore.collection(this.cacheCollection).doc(key).get();
+    const snapshot = await this.firestore
+      .collection(this.cacheCollection)
+      .doc(key)
+      .get();
     if (!snapshot.exists) {
       return null;
     }

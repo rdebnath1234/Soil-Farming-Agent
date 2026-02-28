@@ -16,6 +16,7 @@ import { UpdateSoilDto } from './dto/update-soil.dto';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
+import type { AuthenticatedRequest } from '../common/interfaces/authenticated-request.interface';
 import { Role } from '../users/role.enum';
 import { ActivityLogsService } from '../activity-logs/activity-logs.service';
 
@@ -43,7 +44,10 @@ export class SoilsController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.ADMIN)
   @Post()
-  async create(@Body() createSoilDto: CreateSoilDto, @Req() req: any) {
+  async create(
+    @Body() createSoilDto: CreateSoilDto,
+    @Req() req: AuthenticatedRequest,
+  ) {
     const soil = await this.soilsService.create(createSoilDto, req.user.email);
     await this.activityLogsService.create({
       action: 'CREATE_SOIL',
@@ -60,7 +64,7 @@ export class SoilsController {
   async update(
     @Param('id') id: string,
     @Body() updateSoilDto: UpdateSoilDto,
-    @Req() req: any,
+    @Req() req: AuthenticatedRequest,
   ) {
     const soil = await this.soilsService.update(id, updateSoilDto);
     await this.activityLogsService.create({
@@ -75,7 +79,7 @@ export class SoilsController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.ADMIN)
   @Delete(':id')
-  async remove(@Param('id') id: string, @Req() req: any) {
+  async remove(@Param('id') id: string, @Req() req: AuthenticatedRequest) {
     const response = await this.soilsService.remove(id);
     await this.activityLogsService.create({
       action: 'DELETE_SOIL',

@@ -1,6 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 import api from '../api';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/useAuth';
+
+const INITIAL_MANDI_FILTERS = {
+  state: 'West Bengal',
+  district: '',
+  market: '',
+  commodity: 'Potato',
+  arrivalDate: '',
+  limit: 15,
+};
 
 function SoilForm({ onCreated }) {
   const [formData, setFormData] = useState({
@@ -522,14 +531,7 @@ function AiAssistant() {
 }
 
 function MandiPriceBoard({ isAdmin }) {
-  const [filters, setFilters] = useState({
-    state: 'West Bengal',
-    district: '',
-    market: '',
-    commodity: 'Potato',
-    arrivalDate: '',
-    limit: 15,
-  });
+  const [filters, setFilters] = useState(INITIAL_MANDI_FILTERS);
   const [records, setRecords] = useState([]);
   const [meta, setMeta] = useState({
     count: 0,
@@ -583,7 +585,43 @@ function MandiPriceBoard({ isAdmin }) {
   };
 
   useEffect(() => {
-    void loadMandiPrices();
+    let isActive = true;
+
+    const loadInitialMandiPrices = async () => {
+      setLoading(true);
+      setError('');
+
+      try {
+        const { data } = await api.get('/agmarknet/prices', {
+          params: INITIAL_MANDI_FILTERS,
+        });
+        if (!isActive) {
+          return;
+        }
+
+        setRecords(data.records || []);
+        setMeta((prev) => ({
+          ...prev,
+          count: data.count || 0,
+          updatedDate: data.updatedDate || '',
+          lastFetchedAt: new Date().toISOString(),
+        }));
+      } catch (err) {
+        if (isActive) {
+          setError(err.response?.data?.message || 'Mandi price data load failed');
+        }
+      } finally {
+        if (isActive) {
+          setLoading(false);
+        }
+      }
+    };
+
+    void loadInitialMandiPrices();
+
+    return () => {
+      isActive = false;
+    };
   }, []);
 
   return (
@@ -905,8 +943,43 @@ export default function DashboardPage() {
   };
 
   useEffect(() => {
-    void loadData();
-  }, [soilQuery, distributorQuery]);
+    let isActive = true;
+
+    const loadDashboardData = async () => {
+      try {
+        const requests = [
+          api.get('/soils', { params: soilQuery }),
+          api.get('/distributors', { params: distributorQuery }),
+        ];
+
+        if (isAdmin) {
+          requests.push(api.get('/logs'));
+        }
+
+        const [soilsResponse, distributorsResponse, logsResponse] =
+          await Promise.all(requests);
+
+        if (!isActive) {
+          return;
+        }
+
+        setError('');
+        setSoilsData(soilsResponse.data);
+        setDistributorsData(distributorsResponse.data);
+        setLogs(isAdmin ? (logsResponse?.data ?? []) : []);
+      } catch (err) {
+        if (isActive) {
+          setError(err.response?.data?.message || 'Failed to load dashboard data');
+        }
+      }
+    };
+
+    void loadDashboardData();
+
+    return () => {
+      isActive = false;
+    };
+  }, [distributorQuery, isAdmin, soilQuery]);
 
   const deleteSoil = async (id) => {
     await api.delete(`/soils/${id}`);

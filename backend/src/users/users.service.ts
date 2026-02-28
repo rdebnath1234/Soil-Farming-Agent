@@ -56,8 +56,11 @@ export class UsersService {
     return snapshot.data() as UserRecord;
   }
 
-  sanitize(user: UserRecord | (Omit<UserRecord, 'password'> & { password?: string })) {
+  sanitize(
+    user: UserRecord | (Omit<UserRecord, 'password'> & { password?: string }),
+  ) {
     const { password: _password, ...rest } = user;
+    void _password;
     return rest;
   }
 

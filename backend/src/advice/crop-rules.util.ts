@@ -10,11 +10,17 @@ export function generateCropRecommendations(soil: SoilProperties) {
   }
 
   if (clay !== null && clay >= 40) {
-    items.set('Rice', 'মাটিতে কাদামাটি বেশি, তাই ধানের জন্য পানি ধরে রাখতে সুবিধা হবে');
+    items.set(
+      'Rice',
+      'মাটিতে কাদামাটি বেশি, তাই ধানের জন্য পানি ধরে রাখতে সুবিধা হবে',
+    );
   }
 
   if (sand !== null && sand >= 50) {
-    items.set('Groundnut', 'বালির পরিমাণ বেশি হওয়ায় বাদামের শিকড় সহজে বৃদ্ধি পাবে');
+    items.set(
+      'Groundnut',
+      'বালির পরিমাণ বেশি হওয়ায় বাদামের শিকড় সহজে বৃদ্ধি পাবে',
+    );
   }
 
   if (ph !== null && ph < 6) {

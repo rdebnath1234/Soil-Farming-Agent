@@ -3,6 +3,7 @@ import { ActivityLogsService } from '../activity-logs/activity-logs.service';
 import { Roles } from '../common/decorators/roles.decorator';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
+import type { AuthenticatedRequest } from '../common/interfaces/authenticated-request.interface';
 import { Role } from '../users/role.enum';
 import { QueryAgmarknetDto } from './dto/query-agmarknet.dto';
 import { AgmarknetService } from './agmarknet.service';
@@ -16,7 +17,10 @@ export class AgmarknetController {
   ) {}
 
   @Get('prices')
-  async getLivePrices(@Query() query: QueryAgmarknetDto, @Req() req: any) {
+  async getLivePrices(
+    @Query() query: QueryAgmarknetDto,
+    @Req() req: AuthenticatedRequest,
+  ) {
     const result = await this.agmarknetService.fetchLive(query);
 
     await this.activityLogsService.create({
@@ -32,7 +36,10 @@ export class AgmarknetController {
   @Post('sync')
   @UseGuards(RolesGuard)
   @Roles(Role.ADMIN)
-  async syncToDatabase(@Query() query: QueryAgmarknetDto, @Req() req: any) {
+  async syncToDatabase(
+    @Query() query: QueryAgmarknetDto,
+    @Req() req: AuthenticatedRequest,
+  ) {
     const result = await this.agmarknetService.syncToDb(query);
 
     await this.activityLogsService.create({

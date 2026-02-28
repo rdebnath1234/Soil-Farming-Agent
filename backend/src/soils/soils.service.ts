@@ -44,12 +44,7 @@ export class SoilsService {
 
     if (search) {
       items = items.filter((item) =>
-        [
-          item.soilType,
-          item.suitableCrops,
-          item.nutrients,
-          item.irrigationTips,
-        ]
+        [item.soilType, item.suitableCrops, item.nutrients, item.irrigationTips]
           .join(' ')
           .toLowerCase()
           .includes(search),

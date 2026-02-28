@@ -1,4 +1,8 @@
-import { Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { Firestore } from 'firebase-admin/firestore';
 import { FIRESTORE } from '../firebase/firebase.constants';
 import { SoilProperties } from './types/advice.types';
@@ -40,7 +44,9 @@ export class AdviceSoilService {
     try {
       response = await fetch(url.toString());
     } catch {
-      throw new InternalServerErrorException('Unable to reach SoilGrids service');
+      throw new InternalServerErrorException(
+        'Unable to reach SoilGrids service',
+      );
     }
 
     if (!response.ok) {
@@ -49,7 +55,9 @@ export class AdviceSoilService {
       );
     }
 
-    const payload = (await response.json()) as { properties?: { layers?: SoilGridLayer[] } };
+    const payload = (await response.json()) as {
+      properties?: { layers?: SoilGridLayer[] };
+    };
     const layers = payload?.properties?.layers || [];
 
     const soil: SoilProperties = {
@@ -84,7 +92,11 @@ export class AdviceSoilService {
     const valueMap = layer?.depths?.[0]?.values || {};
     const rawValue = this.pickValue(valueMap);
 
-    if (rawValue === null || rawValue === undefined || !Number.isFinite(rawValue)) {
+    if (
+      rawValue === null ||
+      rawValue === undefined ||
+      !Number.isFinite(rawValue)
+    ) {
       return null;
     }
 
@@ -96,12 +108,17 @@ export class AdviceSoilService {
     if (typeof values.Q0_5 === 'number') return values.Q0_5;
     if (typeof values['Q0.5'] === 'number') return values['Q0.5'];
     if (typeof values.mean === 'number') return values.mean;
-    const first = Object.values(values).find((value) => typeof value === 'number');
+    const first = Object.values(values).find(
+      (value) => typeof value === 'number',
+    );
     return typeof first === 'number' ? first : null;
   }
 
   private async getCache<T>(key: string): Promise<T | null> {
-    const snapshot = await this.firestore.collection(this.cacheCollection).doc(key).get();
+    const snapshot = await this.firestore
+      .collection(this.cacheCollection)
+      .doc(key)
+      .get();
     if (!snapshot.exists) return null;
 
     const data = snapshot.data() as

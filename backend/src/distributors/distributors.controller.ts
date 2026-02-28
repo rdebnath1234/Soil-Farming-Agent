@@ -16,6 +16,7 @@ import { UpdateDistributorDto } from './dto/update-distributor.dto';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
+import type { AuthenticatedRequest } from '../common/interfaces/authenticated-request.interface';
 import { Role } from '../users/role.enum';
 import { ActivityLogsService } from '../activity-logs/activity-logs.service';
 
@@ -45,7 +46,7 @@ export class DistributorsController {
   @Post()
   async create(
     @Body() createDistributorDto: CreateDistributorDto,
-    @Req() req: any,
+    @Req() req: AuthenticatedRequest,
   ) {
     const distributor = await this.distributorsService.create(
       createDistributorDto,
@@ -68,7 +69,7 @@ export class DistributorsController {
   async update(
     @Param('id') id: string,
     @Body() updateDistributorDto: UpdateDistributorDto,
-    @Req() req: any,
+    @Req() req: AuthenticatedRequest,
   ) {
     const distributor = await this.distributorsService.update(
       id,
@@ -88,7 +89,7 @@ export class DistributorsController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.ADMIN)
   @Delete(':id')
-  async remove(@Param('id') id: string, @Req() req: any) {
+  async remove(@Param('id') id: string, @Req() req: AuthenticatedRequest) {
     const response = await this.distributorsService.remove(id);
 
     await this.activityLogsService.create({

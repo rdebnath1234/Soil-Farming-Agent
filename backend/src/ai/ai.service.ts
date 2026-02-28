@@ -2,7 +2,10 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Firestore } from 'firebase-admin/firestore';
 import OpenAI from 'openai';
 import { FIRESTORE } from '../firebase/firebase.constants';
-import { CreateKnowledgeDocsDto, KnowledgeDocItemDto } from './dto/create-knowledge-doc.dto';
+import {
+  CreateKnowledgeDocsDto,
+  KnowledgeDocItemDto,
+} from './dto/create-knowledge-doc.dto';
 import { AskAiDto } from './dto/ask-ai.dto';
 import { KnowledgeDoc } from './types/knowledge-doc.type';
 
@@ -95,9 +98,7 @@ export class AiService {
       language: item.language || 'bn',
       tags: item.tags || [],
       ...(embedding ? { embedding } : {}),
-      createdAt: existing.exists
-        ? (existing.data()?.createdAt as string)
-        : now,
+      createdAt: existing.exists ? (existing.data()?.createdAt as string) : now,
       updatedAt: now,
     };
 
@@ -149,7 +150,8 @@ export class AiService {
 
     return docs
       .map((doc) => {
-        const hay = `${doc.title} ${doc.content} ${(doc.tags || []).join(' ')}`.toLowerCase();
+        const hay =
+          `${doc.title} ${doc.content} ${(doc.tags || []).join(' ')}`.toLowerCase();
         const score = tokens.reduce(
           (acc, token) => acc + (hay.includes(token) ? 1 : 0),
           0,

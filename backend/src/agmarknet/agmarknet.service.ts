@@ -22,8 +22,7 @@ type AgmarknetApiRecord = {
 @Injectable()
 export class AgmarknetService {
   private readonly resourceId =
-    process.env.AGMARKNET_RESOURCE_ID ||
-    '9ef84268-d588-465a-a308-a864a43d0070';
+    process.env.AGMARKNET_RESOURCE_ID || '9ef84268-d588-465a-a308-a864a43d0070';
   private readonly apiKey =
     process.env.AGMARKNET_API_KEY ||
     '579b464db66ec23bdd000001d9143fc81ac74bce7ad727abc2705a8a';
@@ -123,7 +122,9 @@ export class AgmarknetService {
     return `${this.baseUrl}/${this.resourceId}?${params.toString()}`;
   }
 
-  private mapRecord(item: AgmarknetApiRecord): Omit<MandiPriceRecord, '_id' | 'syncedAt'> {
+  private mapRecord(
+    item: AgmarknetApiRecord,
+  ): Omit<MandiPriceRecord, '_id' | 'syncedAt'> {
     return {
       source: 'agmarknet',
       state: String(item.state || ''),

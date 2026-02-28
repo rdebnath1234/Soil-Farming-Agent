@@ -1,41 +1,47 @@
-import { Transform } from 'class-transformer';
+import { Transform, type TransformFnParams } from 'class-transformer';
 import { IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
+
+const trimString = ({ value }: TransformFnParams): string | undefined =>
+  typeof value === 'string' ? value.trim() : undefined;
+
+const toNumber = ({ value }: TransformFnParams): number | undefined =>
+  value === undefined ? undefined : Number(value);
 
 export class QueryAgmarknetDto {
   @IsOptional()
   @IsString()
-  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
+  @Transform(trimString)
   state?: string;
 
   @IsOptional()
   @IsString()
-  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
+  @Transform(trimString)
   district?: string;
 
   @IsOptional()
   @IsString()
-  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
+  @Transform(trimString)
   market?: string;
 
   @IsOptional()
   @IsString()
-  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
+  @Transform(trimString)
   commodity?: string;
 
   @IsOptional()
   @IsString()
-  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
+  @Transform(trimString)
   arrivalDate?: string;
 
   @IsOptional()
-  @Transform(({ value }) => Number(value))
+  @Transform(toNumber)
   @IsInt()
   @Min(1)
   @Max(100)
   limit?: number;
 
   @IsOptional()
-  @Transform(({ value }) => Number(value))
+  @Transform(toNumber)
   @IsInt()
   @Min(0)
   @Max(5000)

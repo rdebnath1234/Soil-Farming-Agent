@@ -5,6 +5,7 @@ import { AskAiDto } from './dto/ask-ai.dto';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
+import type { AuthenticatedRequest } from '../common/interfaces/authenticated-request.interface';
 import { Role } from '../users/role.enum';
 import { ActivityLogsService } from '../activity-logs/activity-logs.service';
 
@@ -28,7 +29,7 @@ export class AiController {
   @Roles(Role.ADMIN)
   async ingestKnowledge(
     @Body() docsDto: CreateKnowledgeDocsDto,
-    @Req() req: any,
+    @Req() req: AuthenticatedRequest,
   ) {
     const result = await this.aiService.ingestKnowledge(
       docsDto,
@@ -46,7 +47,7 @@ export class AiController {
   }
 
   @Post('ask')
-  async ask(@Body() askDto: AskAiDto, @Req() req: any) {
+  async ask(@Body() askDto: AskAiDto, @Req() req: AuthenticatedRequest) {
     const result = await this.aiService.askQuestion(askDto);
 
     await this.activityLogsService.create({
