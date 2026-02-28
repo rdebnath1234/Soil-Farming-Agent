@@ -15,6 +15,11 @@ Full-stack agriculture web app built from the provided project statement with ro
 - Backend: Node.js, NestJS, Firebase Admin SDK
 - Database: Firebase Firestore
 
+## Runtime Requirements
+- Node.js: `>=22 <24`
+- npm: lockfiles are generated with npm v10
+- Docker: Docker Engine with Compose support
+
 ## Project Structure
 - `/frontend` React client
 - `/backend` NestJS API
@@ -107,11 +112,6 @@ npm run dev
 ## Docker (One Command)
 Run the entire stack (frontend + backend):
 ```bash
-docker-compose up --build
-```
-
-If your machine supports the plugin form, this also works:
-```bash
 docker compose up --build
 ```
 
@@ -122,6 +122,26 @@ Services:
 Docker uses backend env from:
 - `/Users/riyadebnathdas/Desktop/Projects/Soil Farming Agent/backend/.env`
 Make sure Firebase variables are set there before running compose.
+
+## Railway Deployment
+Current live deployment:
+- Frontend: `https://soil-farming-frontend-production.up.railway.app`
+- Backend: `https://soil-farming-backend-production.up.railway.app`
+
+Railway service layout:
+- `soil-farming-backend`: deploys from `/backend`
+- `soil-farming-frontend`: deploys from `/frontend`
+
+Deploy the current Docker targets from this repo with Railway CLI:
+```bash
+railway up backend --path-as-root -p 67ec375c-e6f0-4ec5-be9b-81e384bb705a -e production -s soil-farming-backend
+railway up frontend --path-as-root -p 67ec375c-e6f0-4ec5-be9b-81e384bb705a -e production -s soil-farming-frontend
+```
+
+Important Railway runtime notes:
+- The frontend container listens on internal port `8080` in Railway.
+- The frontend nginx proxy forwards `/api/*` to the Railway backend domain.
+- Set backend `FRONTEND_ORIGIN=https://soil-farming-frontend-production.up.railway.app` for browser CORS.
 
 ## Environment Variables
 Backend (`/backend/.env`):
@@ -200,6 +220,8 @@ curl \"http://localhost:3000/advice?pincode=700001\" \\
 ## Build Validation
 - Backend: `npm run build`
 - Frontend: `npm run build`
+- Backend lint: `npm run lint`
+- Frontend lint: `npm run lint`
 
 ## Feature Screenshots
 ### Public Pages
