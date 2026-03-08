@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Sora:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap');
 
 :root {
   --bg-1: #f4f9ef;
@@ -116,39 +116,88 @@ textarea {
 }
 
 .landing-page {
-  max-width: 1180px;
-  margin: 1.8rem auto 2.2rem;
+  max-width: 1320px;
+  margin: 1.35rem auto 2.2rem;
   padding: 0 1rem;
   display: grid;
-  gap: 1rem;
+  gap: 1.1rem;
 }
 
-.landing-hero {
-  display: grid;
-  gap: 0.7rem;
-  padding: 1.5rem;
+.olayard-theme {
+  color: #15212a;
+}
+
+.olayard-shell {
+  border: 1px solid #c6d8bf;
+  border-radius: 34px;
+  padding: 1.35rem;
   background:
-    linear-gradient(145deg, rgba(210, 245, 190, 0.8), rgba(170, 221, 184, 0.55)),
-    repeating-linear-gradient(
-      -12deg,
-      rgba(32, 100, 64, 0.08) 0 10px,
-      rgba(32, 100, 64, 0.03) 10px 20px
-    );
+    radial-gradient(circle at 9% 14%, rgba(198, 233, 255, 0.95) 0, transparent 34%),
+    radial-gradient(circle at 85% 83%, rgba(210, 241, 150, 0.88) 0, transparent 40%),
+    linear-gradient(155deg, #f7f8f3 0%, #ecf8e4 48%, #e7f3ff 100%);
+  box-shadow: 0 24px 54px rgba(18, 38, 26, 0.14);
 }
 
-.landing-hero h1 {
-  font-size: clamp(2rem, 4vw, 3.1rem);
+.olayard-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 0.1rem 0.3rem 1rem;
 }
 
-.landing-hero p {
-  max-width: 720px;
+.olayard-brand {
   margin: 0;
-  color: #2c4347;
-  font-size: 1.03rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.olayard-nav nav {
+  display: flex;
+  gap: 1.15rem;
+}
+
+.olayard-nav nav a {
+  text-decoration: none;
+  color: #5e6b72;
+  font-weight: 500;
+  font-size: 0.92rem;
+}
+
+.olayard-nav-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.olayard-hero {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.92fr) minmax(280px, 1.08fr);
+  align-items: center;
+  gap: 1rem;
+  min-height: 520px;
+}
+
+.olayard-copy {
+  display: grid;
+  gap: 0.8rem;
+  max-width: 540px;
+}
+
+.olayard-copy h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.15rem, 6vw, 4.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+}
+
+.olayard-copy p {
+  margin: 0;
+  color: #46545a;
+  max-width: 500px;
 }
 
 .landing-actions {
-  margin-top: 0.4rem;
+  margin-top: 0.5rem;
   display: flex;
   gap: 0.7rem;
   flex-wrap: wrap;
@@ -156,10 +205,10 @@ textarea {
 
 .link-btn {
   text-decoration: none;
-  border-radius: 12px;
-  padding: 0.68rem 1rem;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
   font-weight: 700;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
 }
 
 .link-btn:hover {
@@ -168,23 +217,174 @@ textarea {
 
 .link-btn.primary {
   color: #fff;
-  background: linear-gradient(120deg, var(--brand), var(--brand-dark));
+  background: linear-gradient(120deg, #0f1f1b, #2d4f3d);
 }
 
 .link-btn.secondary {
-  color: #1d3340;
-  border: 1px solid #a7bfad;
-  background: rgba(255, 255, 255, 0.72);
+  color: #243a33;
+  border: 1px solid #b0c6ac;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.link-btn.ghost {
+  color: #1e2f2d;
+  border: 1px solid #94a6a0;
+  background: rgba(246, 250, 245, 0.74);
+}
+
+.olayard-metrics {
+  margin-top: 0.45rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(100px, 1fr));
+  gap: 0.45rem;
+}
+
+.olayard-metrics div {
+  padding: 0.7rem;
+  border: 1px solid #d6e3d0;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.olayard-metrics strong {
+  display: block;
+  font-family: 'Sora', sans-serif;
+  font-size: 1rem;
+}
+
+.olayard-metrics span {
+  display: block;
+  color: #59656a;
+  font-size: 0.78rem;
+  margin-top: 0.2rem;
+}
+
+.olayard-visual {
+  position: relative;
+  padding: 1.2rem 0.2rem 1rem;
+}
+
+.olayard-panel {
+  border: 1px solid #cedfc8;
+  border-radius: 22px;
+  padding: 0.8rem;
+  background: rgba(248, 252, 245, 0.92);
+  box-shadow: 0 16px 34px rgba(29, 52, 39, 0.16);
+}
+
+.olayard-panel-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.7rem;
+}
+
+.olayard-panel-top p {
+  margin: 0;
+  font-family: 'Sora', sans-serif;
+  font-size: 1.5rem;
+}
+
+.olayard-panel-top button {
+  padding: 0.45rem 0.78rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  box-shadow: none;
+}
+
+.olayard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  grid-template-rows: auto 170px auto;
+  gap: 0.65rem;
+}
+
+.olayard-card {
+  border-radius: 16px;
+  border: 1px solid #d9e7d3;
+  background: #ffffffdd;
+  padding: 0.8rem;
+}
+
+.olayard-card h4 {
+  margin: 0 0 0.45rem;
+  font-size: 0.95rem;
+}
+
+.olayard-card p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #5a6870;
+}
+
+.olayard-map {
+  grid-column: 1 / 3;
+  border-radius: 16px;
+  border: 1px solid #cfdcc9;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.9rem;
+  color: #fff;
+  font-weight: 700;
+  font-family: 'Sora', sans-serif;
+  background:
+    linear-gradient(0deg, rgba(2, 28, 14, 0.28), rgba(2, 28, 14, 0.2)),
+    radial-gradient(circle at 78% 18%, #f2a645 0 15%, transparent 15%),
+    linear-gradient(165deg, #7eb54f 0%, #416c2e 58%, #264524 100%);
+}
+
+.olayard-floating {
+  position: absolute;
+  min-width: 150px;
+  border-radius: 15px;
+  border: 1px solid #cadac4;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 10px 22px rgba(32, 49, 37, 0.16);
+  padding: 0.62rem 0.7rem;
+}
+
+.olayard-floating p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #526067;
+}
+
+.olayard-floating strong {
+  display: block;
+  margin-top: 0.16rem;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.96rem;
+}
+
+.olayard-floating span {
+  display: block;
+  font-size: 0.72rem;
+  margin-top: 0.1rem;
+  color: #5f6c73;
+}
+
+.olayard-weather {
+  top: -0.2rem;
+  right: 0.4rem;
+}
+
+.olayard-ai {
+  left: -0.35rem;
+  bottom: -0.5rem;
 }
 
 .landing-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
   gap: 1rem;
 }
 
 .landing-tile {
   animation-delay: calc(var(--i) * 90ms);
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid #d5e4d2;
 }
 
 .auth-visual {
@@ -673,13 +873,45 @@ textarea {
 }
 
 @media (max-width: 860px) {
-  .auth-page {
-    grid-template-columns: 1fr;
+  .olayard-shell {
+    padding: 1rem;
+    border-radius: 26px;
   }
 
-  .landing-actions {
-    flex-direction: column;
-    align-items: stretch;
+  .olayard-nav {
+    display: grid;
+    grid-template-columns: auto auto;
+    row-gap: 0.65rem;
+    padding-bottom: 0.7rem;
+  }
+
+  .olayard-nav nav {
+    grid-column: 1 / 3;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .olayard-hero {
+    grid-template-columns: 1fr;
+    min-height: unset;
+    gap: 0.9rem;
+  }
+
+  .olayard-copy {
+    max-width: 100%;
+  }
+
+  .olayard-visual {
+    padding: 0.9rem 0 0.9rem;
+  }
+
+  .olayard-ai {
+    left: 0.2rem;
+    bottom: -0.25rem;
+  }
+
+  .auth-page {
+    grid-template-columns: 1fr;
   }
 
   .auth-visual {
@@ -737,5 +969,53 @@ textarea {
   .ai-launcher {
     right: 0.8rem;
     bottom: 0.8rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .olayard-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .olayard-nav nav {
+    grid-column: 1;
+    gap: 0.62rem;
+  }
+
+  .olayard-nav-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .olayard-copy h1 {
+    font-size: clamp(1.9rem, 10vw, 2.7rem);
+  }
+
+  .olayard-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .olayard-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .olayard-map {
+    grid-column: auto;
+    min-height: 140px;
+  }
+
+  .olayard-floating {
+    position: static;
+    margin-top: 0.55rem;
+  }
+
+  .landing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
